@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "projects": {
+    "cl-panel": {
+      "projectType": "application",
+      "root": "apps/cl-panel",
+      "sourceRoot": "apps/cl-panel/src",
+      "prefix": "test-nx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/cl-panel",
+            "index": "apps/cl-panel/src/index.html",
+            "main": "apps/cl-panel/src/main.ts",
+            "polyfills": "apps/cl-panel/src/polyfills.ts",
+            "tsConfig": "apps/cl-panel/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/cl-panel/src/favicon.ico",
+              "apps/cl-panel/src/assets"
+            ],
+            "styles": ["apps/cl-panel/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/cl-panel/src/environments/environment.ts",
+                  "with": "apps/cl-panel/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "cl-panel:build:production"
+            },
+            "development": {
+              "browserTarget": "cl-panel:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cl-panel:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/cl-panel/src/**/*.ts",
+              "apps/cl-panel/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/cl-panel"],
+          "options": {
+            "jestConfig": "apps/cl-panel/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "cl-panel-e2e": {
+      "root": "apps/cl-panel-e2e",
+      "sourceRoot": "apps/cl-panel-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/cl-panel-e2e/cypress.json",
+            "devServerTarget": "cl-panel:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cl-panel:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/cl-panel-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["cl-panel"]
+    }
+  }
+}
