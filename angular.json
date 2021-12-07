@@ -1,6 +1,128 @@
 {
   "version": 1,
   "projects": {
+    "c-hosting": {
+      "projectType": "application",
+      "root": "apps/c-hosting",
+      "sourceRoot": "apps/c-hosting/src",
+      "prefix": "ps",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/c-hosting",
+            "index": "apps/c-hosting/src/index.html",
+            "main": "apps/c-hosting/src/main.ts",
+            "polyfills": "apps/c-hosting/src/polyfills.ts",
+            "tsConfig": "apps/c-hosting/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/c-hosting/src/favicon.ico",
+              "apps/c-hosting/src/assets"
+            ],
+            "styles": ["apps/c-hosting/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/c-hosting/src/environments/environment.ts",
+                  "with": "apps/c-hosting/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "c-hosting:build:production"
+            },
+            "development": {
+              "browserTarget": "c-hosting:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "c-hosting:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/c-hosting/src/**/*.ts",
+              "apps/c-hosting/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/c-hosting"],
+          "options": {
+            "jestConfig": "apps/c-hosting/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "c-hosting-e2e": {
+      "root": "apps/c-hosting-e2e",
+      "sourceRoot": "apps/c-hosting-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/c-hosting-e2e/cypress.json",
+            "devServerTarget": "c-hosting:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "c-hosting:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/c-hosting-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["c-hosting"]
+    },
     "cl-panel": {
       "projectType": "application",
       "root": "apps/cl-panel",
@@ -122,6 +244,32 @@
       },
       "tags": [],
       "implicitDependencies": ["cl-panel"]
+    },
+    "my-lib": {
+      "projectType": "library",
+      "root": "libs/my-lib",
+      "sourceRoot": "libs/my-lib/src",
+      "prefix": "test-nx",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/my-lib"],
+          "options": {
+            "jestConfig": "libs/my-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/my-lib/src/**/*.ts",
+              "libs/my-lib/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }

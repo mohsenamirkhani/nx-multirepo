@@ -1,5 +1,5 @@
 {
-  "npmScope": "test-nx",
+  "npmScope": "ps",
   "affected": {
     "defaultBase": "main"
   },
@@ -16,9 +16,15 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "accessToken": "MGZiZjVkMjQtNzgwZS00YTdhLWI4NTgtYjdmMjA0YzRlZGIyfHJlYWQtd3JpdGU="
       }
     }
   },
