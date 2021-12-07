@@ -39,6 +39,3 @@ testem.log
 Thumbs.db
 
 .angular
-
-apps/*
-libs/*

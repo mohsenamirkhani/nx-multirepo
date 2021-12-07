@@ -1,9 +1,9 @@
-[submodule "cloudHosting"]
+[submodule "apps/c-hosting"]
 	path = apps/c-hosting
-	url = https://github.com/mohsenamirkhani/nx-c-hosting
-[submodule "clPanel"]
+	url = https://github.com/mohsenamirkhani/nx-c-hosting.git
+[submodule "apps/cl-panel"]
 	path = apps/cl-panel
-	url = https://github.com/mohsenamirkhani/nx-cl-panel
-[submodule "clPanel"]
+	url = https://github.com/mohsenamirkhani/nx-cl-panel.git
+[submodule "libs/my-lib"]
 	path = libs/my-lib
-	url = https://github.com/mohsenamirkhani/nx-lib
+	url = https://github.com/mohsenamirkhani/nx-lib.git
