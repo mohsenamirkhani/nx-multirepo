@@ -8,7 +8,7 @@
       "prefix": "ps",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@nrwl/angular:webpack-browser",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/c-hosting",
@@ -22,7 +22,11 @@
               "apps/c-hosting/src/assets"
             ],
             "styles": ["apps/c-hosting/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "apps/c-hosting/webpack.config.js"
+            },
+            "commonChunk": false
           },
           "configurations": {
             "production": {
@@ -44,7 +48,10 @@
                   "with": "apps/c-hosting/src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "customWebpackConfig": {
+                "path": "apps/c-hosting/webpack.prod.config.js"
+              }
             },
             "development": {
               "buildOptimizer": false,
@@ -58,7 +65,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@nrwl/angular:webpack-server",
           "configurations": {
             "production": {
               "browserTarget": "c-hosting:build:production"
@@ -67,12 +74,16 @@
               "browserTarget": "c-hosting:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4300
+          }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "ngx-build-plus:extract-i18n",
           "options": {
-            "browserTarget": "c-hosting:build"
+            "browserTarget": "c-hosting:build",
+            "extraWebpackConfig": "apps/c-hosting/webpack.config.js"
           }
         },
         "lint": {
@@ -130,7 +141,7 @@
       "prefix": "test-nx",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@nrwl/angular:webpack-browser",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/cl-panel",
@@ -144,7 +155,11 @@
               "apps/cl-panel/src/assets"
             ],
             "styles": ["apps/cl-panel/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "apps/cl-panel/webpack.config.js"
+            },
+            "commonChunk": false
           },
           "configurations": {
             "production": {
@@ -166,7 +181,10 @@
                   "with": "apps/cl-panel/src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "customWebpackConfig": {
+                "path": "apps/cl-panel/webpack.prod.config.js"
+              }
             },
             "development": {
               "buildOptimizer": false,
@@ -180,7 +198,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@nrwl/angular:webpack-server",
           "configurations": {
             "production": {
               "browserTarget": "cl-panel:build:production"
@@ -189,12 +207,16 @@
               "browserTarget": "cl-panel:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4200
+          }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "ngx-build-plus:extract-i18n",
           "options": {
-            "browserTarget": "cl-panel:build"
+            "browserTarget": "cl-panel:build",
+            "extraWebpackConfig": "apps/cl-panel/webpack.config.js"
           }
         },
         "lint": {
